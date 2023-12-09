@@ -1,0 +1,5 @@
+# ninja log v5
+11	13247	7237844086651948	build.ninja	c0992f06b84a9d2a
+5	3847	7237844127955626	CMakeFiles/2D_game_assignment.dir/src/main.cpp.obj	c9dac54a6daad269
+1	3861	7237844128154189	CMakeFiles/2D_game_assignment.dir/src/game.cpp.obj	41682cbe57267077
+3862	4457	7237844134061297	2D_game_assignment.exe	1922ebd9c79359ed
