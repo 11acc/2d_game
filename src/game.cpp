@@ -9,8 +9,8 @@
 
 const float Game::SCENE_WIDTH = 1920.0f;
 const float Game::SCENE_HEIGHT = 1280.0f;
-const float Game::PLAYER_START_X = 0.0f;
-const float Game::PLAYER_START_Y = 0.0f;
+const float Game::PLAYER_START_X = 960.0f;
+const float Game::PLAYER_START_Y = 640.0f;
 const float Game::RADIUS = 40.0f;
 
 Game::Game() {
