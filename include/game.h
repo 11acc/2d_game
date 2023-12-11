@@ -1,7 +1,8 @@
 /*
  * File: game.h
- * Author: Alessandra Gorla
- * Date: November 21, 2023
+ * Author: Alejandro Gutierrez Acosta [11acc], Katherine Duque, Rama Mallela
+ * Contributing Author: Alessandra Gorla
+ * Date: Dec 11 2023
  * Description: Game class header.
  */
 #pragma once
