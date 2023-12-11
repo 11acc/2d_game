@@ -1,15 +1,16 @@
 /*
  * File: game.cpp
- * Author: Alessandra Gorla
- * Date: November 21, 2023
- * Description: Game class to deal with initialization and controller of 2D my game application.
+ * Author: Alejandro Gutierrez Acosta [11acc], Katherine Duque, Rama Mallela
+ * Contributing Author: Alessandra Gorla
+ * Date: Dec 11 2023
+ * Description: Game class to deal with initialization and controller of 2D game application.
  */
 #include "game.h"
 
-const float Game::SCENE_WIDTH = 800.0f;
-const float Game::SCENE_HEIGHT = 600.0f;
-const float Game::PLAYER_START_X = 400.0f;
-const float Game::PLAYER_START_Y = 300.0f;
+const float Game::SCENE_WIDTH = 1920.0f;
+const float Game::SCENE_HEIGHT = 1280.0f;
+const float Game::PLAYER_START_X = 0.0f;
+const float Game::PLAYER_START_Y = 0.0f;
 const float Game::RADIUS = 40.0f;
 
 Game::Game() {

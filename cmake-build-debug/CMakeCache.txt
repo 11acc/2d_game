@@ -179,7 +179,7 @@ CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 CMAKE_LINKER:FILEPATH=C:/Program Files/JetBrains/CLion 2023.2.1/bin/mingw/bin/ld.exe
 
 //make program
-CMAKE_MAKE_PROGRAM:FILEPATH=C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/ninja/win/x64/ninja.exe
+CMAKE_MAKE_PROGRAM:FILEPATH=C:/Program Files/JetBrains/CLion 2023.2.1/bin/ninja/win/x64/ninja.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -602,6 +602,8 @@ _Python_EXECUTABLE:INTERNAL=C:/Users/aleja/AppData/Local/Programs/Python/Python3
 //Python Properties
 _Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;2;64;;cp311-win_amd64;;C:\Users\aleja\AppData\Local\Programs\Python\Python311\Lib;C:\Users\aleja\AppData\Local\Programs\Python\Python311\Lib;C:\Users\aleja\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Users\aleja\AppData\Local\Programs\Python\Python311\Lib\site-packages
 _Python_INTERPRETER_SIGNATURE:INTERNAL=5237bca5d741664871b4531cd63159b5
+//Interpreter reason failure
+_Python_Interpreter_REASON_FAILURE:INTERNAL=
 //NumPy reason failure
 _Python_NumPy_REASON_FAILURE:INTERNAL=
 cmake_package_name:INTERNAL=GTest
