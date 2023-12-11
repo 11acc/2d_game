@@ -3,7 +3,7 @@
  * Author: Alejandro Gutierrez Acosta [11acc], Katherine Duque, Rama Mallela
  * Contributing Author: Alessandra Gorla
  * Date: Dec 11 2023
- * Description: Game class to deal with initialization and controller of 2D game application.
+ * Description: Game class to deal with initialization and controller of 2D game application
  */
 #include "game.h"
 
