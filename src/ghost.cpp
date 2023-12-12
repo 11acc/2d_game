@@ -149,3 +149,18 @@ void Ghost::updateMovement() {
 
     ghost.setPosition(newPos);
 }
+
+/**
+ * Set a custom position for a ghost
+ * @test_function
+ */
+void Ghost::setPosition(const sf::Vector2f& position) {
+    ghost.setPosition(position);
+}
+/**
+ * Get the position of a ghost
+ * @test_function
+ */
+sf::Vector2f Ghost::getPosition() {
+    return ghost.getPosition();
+}

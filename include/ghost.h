@@ -13,13 +13,18 @@
 class Ghost {
 public:
     explicit Ghost(const sf::Vector2f& playerPosition);
-    const sf::CircleShape& getGhost() const { return ghost; }
+    const sf::CircleShape& getGhost() { return ghost; }
+    static float getHitbox() { return HITBOX; }
 
     void updateMovement();
     // returns how long the ghost has lived
     float ghostLifeExpectancy() const {
         return spawnClock.getElapsedTime().asSeconds();
     }
+
+    // Test case functions
+    void setPosition(const sf::Vector2f& position);
+    sf::Vector2f getPosition();
 
 private:
     static const float HITBOX;

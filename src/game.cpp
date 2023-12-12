@@ -5,6 +5,7 @@
  * Date: Dec 11 2023
  * Description: Game class to deal with initialization and controller of PacMan game
  */
+
 #include "game.h"
 
 const float Game::SCENE_WIDTH = 1920.0f;

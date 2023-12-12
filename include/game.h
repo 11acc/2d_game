@@ -53,7 +53,7 @@ private:
     void processInput();
     int score;
     float nextSpawnTime;
-    float nextFruitSpawnTime;
+    float nextFruitSpawnTime{};
 
     void update();
     float randSpawnDelay(int type);
