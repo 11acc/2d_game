@@ -41,6 +41,7 @@ private:
     sf::CircleShape player;
     sf::Time speedBoostEndTime;
     sf::Clock speedClock;
+    sf::Text speedBoostText;
     std::vector<Ghost> ghosts;
     sf::Clock ghostSpawnClock;
     std::vector<Fruit> fruits;
@@ -51,6 +52,7 @@ private:
     int initScore();
     int initPlayer();
     void processInput();
+    int displaySpeedText();
     int score;
     float nextSpawnTime;
     float nextFruitSpawnTime{};

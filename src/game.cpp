@@ -102,16 +102,13 @@ void Game::update() {
     player.setPosition(x, y);
 
     // Movement
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && player.getPosition().y > RADIUS) {
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && player.getPosition().y > RADIUS) {
         player.move(0, -player_speed);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && player.getPosition().y < SCENE_HEIGHT - RADIUS) {
+    } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && player.getPosition().y < SCENE_HEIGHT - RADIUS) {
         player.move(0, player_speed);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && player.getPosition().x > RADIUS) {
+    } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && player.getPosition().x > RADIUS) {
         player.move(-player_speed, 0);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && player.getPosition().x < SCENE_WIDTH - RADIUS) {
+    } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && player.getPosition().x < SCENE_WIDTH - RADIUS) {
         player.move(player_speed, 0);
     }
 }
@@ -211,6 +208,24 @@ float Game::pSpeed() {
     }
     return BASE_P_SPEED;
 }
+/**
+ * Display visual speed boost indicator
+ * @return 0 if successfully initialized, 1 otherwise
+ */
+int Game::displaySpeedText() {
+    if (!font.loadFromFile("resources/CyberpunkWaifus.ttf")) {
+        return 1;
+    }
+    speedBoostText.setFont(font);
+    speedBoostText.setCharacterSize(80);
+    speedBoostText.setFillColor(sf::Color::Green);
+    speedBoostText.setString("Speed Boost!");
+    // Top middle of the screen
+    sf::FloatRect textRect = speedBoostText.getLocalBounds();
+    speedBoostText.setOrigin(textRect.width / 2, textRect.height / 2);
+    speedBoostText.setPosition(getSceneWidth() / 2, 20);
+    return 0;
+}
 
 
 
@@ -230,6 +245,12 @@ void Game::render() {
     }
     scoreText.setString("Score: " + std::to_string(score) + " pts");
     window.draw(scoreText);
+
+    // Check if we're within the speed boost period and draw the text if so
+    if (speedClock.getElapsedTime() < speedBoostEndTime) {
+        displaySpeedText();
+        window.draw(speedBoostText);
+    }
 
     window.display();
 }

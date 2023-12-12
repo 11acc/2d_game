@@ -71,8 +71,6 @@ TEST_F(GhostTest, RespectBoundary) {
     EXPECT_LE(newPos.y, boundaryY);
 }
 
-
-
 // Ghost Movement (2): Test to ensure ghost changes direction
 TEST_F(GhostTest, DirectionChange) {
     sf::Vector2f initialPos = ghost->getPosition();
