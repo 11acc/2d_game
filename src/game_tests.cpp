@@ -13,6 +13,8 @@
 /**
  * GhostTest class which creates a simulated environment to test the behaviour
  * of different functions within the game
+ * We use TEST_F because we want a test environment shared among multiple test cases
+ * Test environment: Ghost entity with a time simulation of a provided time input
  */
 class GhostTest : public ::testing::Test {
 protected:
@@ -38,8 +40,20 @@ protected:
 };
 
 /**
- * Test to see if ghost stays within boundaries
+ * GAME TEST_F CASES
+ * - 2 Entity creation tests
  */
+// Entity creation (1): Test if ghosts are spawning within bounds and max count is respected
+//TEST_F(GhostTest, SpawnLimit) {
+// Game::checkObjNum
+//}
+
+/**
+ * GHOST TEST_F CASES
+ * - 2 Ghost movement tests
+ * - 1 Ghost interaction test
+ */
+// Ghost Movement (1): Test to see if ghost stays within boundaries
 TEST_F(GhostTest, RespectBoundary) {
     const float boundaryX = Game::getSceneWidth() - Ghost::getHitbox();
     const float boundaryY = Game::getSceneHeight() - Ghost::getHitbox();
@@ -55,4 +69,20 @@ TEST_F(GhostTest, RespectBoundary) {
     sf::Vector2f newPos = ghost->getPosition();
     EXPECT_LE(newPos.x, boundaryX);
     EXPECT_LE(newPos.y, boundaryY);
+}
+
+
+
+// Ghost Movement (2): Test to ensure ghost changes direction
+TEST_F(GhostTest, DirectionChange) {
+    sf::Vector2f initialPos = ghost->getPosition();
+    // Simulate 10 random movements
+    for (int i = 0; i < 10; ++i) {
+        simulateTime(0.1f);
+        ghost->updateMovement();
+    }
+    sf::Vector2f finalPos = ghost->getPosition();
+
+    // Verifies that val1 != val2
+    EXPECT_NE(initialPos, finalPos);
 }
