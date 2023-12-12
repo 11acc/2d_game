@@ -42,3 +42,17 @@ add_executable(2D_game_assignment
         src/fruit.cpp)
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
+
+# Test executable
+add_executable(game_tests
+        src/game_tests.cpp
+        src/game.cpp
+        src/ghost.cpp
+        src/fruit.cpp
+)
+
+# Link Google Test and SFML to the test executable
+target_link_libraries(game_tests gtest_main sfml-graphics sfml-window sfml-system)
+
+# Add the test to be run by CTest
+add_test(NAME game_tests COMMAND game_tests)
