@@ -23,6 +23,14 @@ link_directories("C:/SFML-2.6.1/lib")
 
 configure_file(resources/background.png ${CMAKE_CURRENT_BINARY_DIR}/resources/background.png COPYONLY)
 configure_file(resources/pacman.png ${CMAKE_CURRENT_BINARY_DIR}/resources/pacman.png COPYONLY)
+configure_file(resources/blue.png ${CMAKE_CURRENT_BINARY_DIR}/resources/blue.png COPYONLY)
+configure_file(resources/orange.png ${CMAKE_CURRENT_BINARY_DIR}/resources/orange.png COPYONLY)
+configure_file(resources/pink.png ${CMAKE_CURRENT_BINARY_DIR}/resources/pink.png COPYONLY)
+configure_file(resources/red.png ${CMAKE_CURRENT_BINARY_DIR}/resources/red.png COPYONLY)
+configure_file(resources/cherry.png ${CMAKE_CURRENT_BINARY_DIR}/resources/cherry.png COPYONLY)
+configure_file(resources/melon.png ${CMAKE_CURRENT_BINARY_DIR}/resources/melon.png COPYONLY)
+configure_file(resources/berry.png ${CMAKE_CURRENT_BINARY_DIR}/resources/berry.png COPYONLY)
+configure_file(resources/CyberpunkWaifus.ttf ${CMAKE_CURRENT_BINARY_DIR}/resources/CyberpunkWaifus.ttf COPYONLY)
 
 # Enable testing
 enable_testing()
@@ -30,6 +38,7 @@ enable_testing()
 add_executable(2D_game_assignment
         src/main.cpp
         src/game.cpp
-        src/game.cpp)
+        src/ghost.cpp
+        src/fruit.cpp)
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
