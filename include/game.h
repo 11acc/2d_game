@@ -35,6 +35,12 @@ private:
     sf::RenderWindow window;
     sf::Sprite background;
     sf::Texture backgroundTexture;
+
+    sf::Clock gameClock;
+    sf::Time totalTime;
+    sf::Text countdownText;
+    sf::Text finalScoreText;
+
     sf::Font font;
     sf::Text scoreText;
     sf::Texture playerTexture;
@@ -56,8 +62,11 @@ private:
     int score;
     float nextSpawnTime;
     float nextFruitSpawnTime{};
+    bool gameEnded;
 
     void update();
+    int clockRender();
+    int finalScoreRender();
     float randSpawnDelay(int type);
     void checkObjNum();
     void checkCollisions();

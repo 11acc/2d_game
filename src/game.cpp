@@ -19,7 +19,7 @@ const float Game::COLLISION_THRESHOLD = 80;
 const float Game::BASE_P_SPEED = 5.0f;
 const float Game::BOOSTED_P_SPEED = 8.0f;
 
-Game::Game() : score(0) {
+Game::Game() : score(0), totalTime(sf::seconds(23)), gameEnded(false) {
     initWindow();
     initBackground();
     initScore();
@@ -75,6 +75,32 @@ int Game::initPlayer() {
     player.setTexture(&playerTexture);
     return 0;
 }
+/**
+ * Display the countdown for the game duration
+ * @return 0 if successfully initialized, 1 otherwise
+ */
+int Game::clockRender() {
+    if (!font.loadFromFile("resources/CyberpunkWaifus.ttf")) {
+        return 1;
+    }
+    countdownText.setFont(font);
+    countdownText.setCharacterSize(42);
+    countdownText.setFillColor(sf::Color::White);
+    countdownText.setPosition(Game::getSceneWidth() - 200.f, 10.f);
+    return 0;
+}
+int Game::finalScoreRender() {
+    if (!font.loadFromFile("resources/CyberpunkWaifus.ttf")) {
+        return 1;
+    }
+    finalScoreText.setFont(font);
+    finalScoreText.setCharacterSize(100);
+    finalScoreText.setFillColor(sf::Color::White);
+    finalScoreText.setString("Game Over! Score: " + std::to_string(score));
+    finalScoreText.setOrigin(finalScoreText.getLocalBounds().width / 2, finalScoreText.getLocalBounds().height / 2);
+    finalScoreText.setPosition(sf::Vector2f(Game::getSceneWidth()/2.0f, Game::getSceneHeight()/2.0f - 30.0f));
+    return 0;
+}
 
 
 /**
@@ -101,15 +127,35 @@ void Game::update() {
     float player_speed = pSpeed();
     player.setPosition(x, y);
 
-    // Movement
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && player.getPosition().y > RADIUS) {
-        player.move(0, -player_speed);
-    } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && player.getPosition().y < SCENE_HEIGHT - RADIUS) {
-        player.move(0, player_speed);
-    } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && player.getPosition().x > RADIUS) {
-        player.move(-player_speed, 0);
-    } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && player.getPosition().x < SCENE_WIDTH - RADIUS) {
-        player.move(player_speed, 0);
+    // Check if game is going on
+    if (!gameEnded) {
+        sf::Time timeLeft = totalTime - gameClock.getElapsedTime();
+        if (timeLeft <= sf::seconds(0)) {
+            gameEnded = true;
+            timeLeft = sf::seconds(0);
+
+            // Clear ghosts and fruits
+            ghosts.clear();
+            fruits.clear();
+
+            finalScoreText.setString("Game Over! Score: " + std::to_string(score));
+        }
+
+        // Update the countdown text
+        countdownText.setString("Time: " + std::to_string(static_cast<int>(timeLeft.asSeconds())));
+
+        if (!gameEnded) {
+            // Movement
+            if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && player.getPosition().y > RADIUS) {
+                player.move(0, -player_speed);
+            } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && player.getPosition().y < SCENE_HEIGHT - RADIUS) {
+                player.move(0, player_speed);
+            } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && player.getPosition().x > RADIUS) {
+                player.move(-player_speed, 0);
+            } else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && player.getPosition().x < SCENE_WIDTH - RADIUS) {
+                player.move(player_speed, 0);
+            }
+        }
     }
 }
 
@@ -233,23 +279,33 @@ int Game::displaySpeedText() {
  * Render elements in the window
  */
 void Game::render() {
-    window.clear(sf::Color::White);
+    // General
     window.draw(background);
-    window.draw(player);
-    for (auto& ghost : ghosts) {
-        ghost.updateMovement();
-        window.draw(ghost.getGhost());
-    }
-    for (const auto& fruit : fruits) {
-        window.draw(fruit.getFruit());
-    }
-    scoreText.setString("Score: " + std::to_string(score) + " pts");
-    window.draw(scoreText);
 
-    // Check if we're within the speed boost period and draw the text if so
-    if (speedClock.getElapsedTime() < speedBoostEndTime) {
-        displaySpeedText();
-        window.draw(speedBoostText);
+    if (!gameEnded) {
+        window.draw(player);
+        for (auto& ghost : ghosts) {
+            ghost.updateMovement();
+            window.draw(ghost.getGhost());
+        }
+        for (const auto& fruit : fruits) {
+            window.draw(fruit.getFruit());
+        }
+        // Text
+        scoreText.setString("Score: " + std::to_string(score) + " pts");
+        window.draw(scoreText);
+        // Check if we're within the speed boost period and draw the text if so
+        if (speedClock.getElapsedTime() < speedBoostEndTime) {
+            displaySpeedText();
+            window.draw(speedBoostText);
+        }
+        // Countdown text
+        clockRender();
+        window.draw(countdownText);
+    } else {
+        // If the game has ended, display the final score text
+        finalScoreRender();
+        window.draw(finalScoreText);
     }
 
     window.display();
