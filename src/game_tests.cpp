@@ -1,5 +1,5 @@
 /*
- * File: ghost_tests.cpp
+ * File: game_tests.cpp
  * Author: Alejandro Gutierrez Acosta [11acc], Katherine Duque, Rama Mallela
  * Date: Dec 11 2023
  * Description: Test case functions for game functions, using GTest
