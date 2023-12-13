@@ -14,11 +14,24 @@
 #include "fruit.h"
 
 class Game {
+    friend class GameTest;
+
 public:
     Game();
     int run();
     static float getSceneWidth() { return SCENE_WIDTH; }
     static float getSceneHeight() { return SCENE_HEIGHT; }
+    static float getMaxGhosts() { return MAX_GHOSTS; }
+    static float getMaxFruits() { return MAX_FRUITS; }
+
+    std::vector<Ghost> getGhosts() { return ghosts; }
+    sf::Clock getGhostSpawnClock() { return ghostSpawnClock; }
+    float getNextSpawnTime() { return nextSpawnTime; }
+
+    std::vector<Fruit> getFruits() { return fruits; }
+    sf::Clock getFruitSpawnClock() { return fruitSpawnClock; }
+    float getNextFruitSpawnTime() { return nextFruitSpawnTime; }
+
 
 private:
     static const float SCENE_WIDTH;

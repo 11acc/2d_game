@@ -39,7 +39,8 @@ add_executable(2D_game_assignment
         src/main.cpp
         src/game.cpp
         src/ghost.cpp
-        src/fruit.cpp)
+        src/fruit.cpp
+)
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
 

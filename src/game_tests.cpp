@@ -1,8 +1,8 @@
 /*
- * File: game_tests.cpp
+ * File: ghost_tests.cpp
  * Author: Alejandro Gutierrez Acosta [11acc], Katherine Duque, Rama Mallela
  * Date: Dec 11 2023
- * Description: Test case functions for all parts of the game, using GTest
+ * Description: Test case functions for game functions, using GTest
  */
 
 #include <gtest/gtest.h>
@@ -11,10 +11,56 @@
 #include "fruit.h"
 
 /**
- * GhostTest class which creates a simulated environment to test the behaviour
+ * GameTest class which creates a simulated environment to test the behaviour
  * of different functions within the game
  * We use TEST_F because we want a test environment shared among multiple test cases
- * Test environment: Ghost entity with a time simulation of a provided time input
+ * Test environment: Player, Ghost and Fruit entities created
+ */
+class GameTest : public ::testing::Test {
+protected:
+    Game game;
+    std::unique_ptr<Ghost> ghost;
+    std::unique_ptr<Fruit> fruit;
+
+protected:
+    void SetUp() override {
+        fruit = std::make_unique<Fruit>(sf::Vector2f(100.f, 100.f));
+    }
+
+    void simulateTime(sf::Clock clock, float seconds) {
+        // We create an initial time point
+        sf::Time elapsedTime = clock.restart();
+        while (elapsedTime.asSeconds() < seconds) {
+            // Update the ghost's movement based on the elapsed time
+            game.checkObjNum();
+
+            // Add "game ticks"
+            sf::Time frameTime = clock.restart();
+            elapsedTime += frameTime;
+        }
+    }
+};
+/**
+ * Entity spawn tests
+ */
+// Test to validate fruit spawning
+TEST_F(GameTest, EntitiesSpawnWithinLimits) {
+    // Simulate time to trigger spawning
+    simulateTime(game.getGhostSpawnClock(), game.getNextSpawnTime() + 0.1f);
+
+    // Check if a ghost is spawned
+    EXPECT_LE(game.getGhosts().size(), Game::getMaxGhosts());
+
+    // Repeat for fruits
+    simulateTime(game.getFruitSpawnClock(), game.getNextFruitSpawnTime() + 0.1f);
+
+    EXPECT_LE(game.getFruits().size(), Game::getMaxFruits());
+}
+
+
+/**
+ * GhostTest simulated environment creates Ghost entity with a time
+ * simulation of a provided time input
  */
 class GhostTest : public ::testing::Test {
 protected:
@@ -38,20 +84,8 @@ protected:
     }
 
 };
-
 /**
- * GAME TEST_F CASES
- * - 2 Entity creation tests
- */
-// Entity creation (1): Test if ghosts are spawning within bounds and max count is respected
-//TEST_F(GhostTest, SpawnLimit) {
-// Game::checkObjNum
-//}
-
-/**
- * GHOST TEST_F CASES
- * - 2 Ghost movement tests
- * - 1 Ghost interaction test
+ * 2 Ghost movement tests
  */
 // Ghost Movement (1): Test to see if ghost stays within boundaries
 TEST_F(GhostTest, RespectBoundary) {
