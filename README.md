@@ -38,4 +38,4 @@ TBD
 
 ## Contributing/License
 
-Fork it, modify it, push it, eat it, summon a duck god with it. Whatever resonable and day-to-day activity you prefer ( •ᴗ•)b
+Fork it, modify it, push it, eat it, summon a duck god with it. Whatever resonable day-to-day activity you prefer ( •ᴗ•)b
