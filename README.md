@@ -34,7 +34,7 @@ $ .
 
 Specifics on test cases in Wiki.
 
-TBD
+TBD.
 
 ## Contributing/License
 
