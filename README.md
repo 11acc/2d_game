@@ -1,4 +1,4 @@
-# 2D-game
+## 2D-game in C++
 
 ![Static Badge](https://img.shields.io/badge/version-1.0-blue)
 
