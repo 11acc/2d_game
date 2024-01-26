@@ -6,6 +6,8 @@ Some kind of pacman... type of thing... lol
 
 PacMan inspired game where the player eats ghosts instead of fleeing from them, the occasional fruits also pop up and give a speed boost. Each ghost when killed (by collision with the player) grants a flat 5 points, with an additional 1-5 points depending on how soon they're killed once they spawn.
 
+Collaborated with [solsylph](https://github.com/solsylph)
+
 ## Dependencies
 
 We use the [SFML library](https://www.sfml-dev.org/index.php) for visual gameplay. [GTest](https://github.com/google/googletest) in order to test case a range of functions for entity behaviour and spawning.
